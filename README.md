@@ -1,5 +1,11 @@
 ## Library to handle any nested iterable (list, tuple, dict, json, etc.) in Pandas - no matter how deep it is nested!
 
+## Update:
+
+**2022/09/30:** DataFrame is now created directly from iter
+
+**2022/09/30:** No more warning (PerformanceWarning: DataFrame is highly fragmented), when DataFrame is created from a huge nested dict (depth: 1486)  Try it: https://raw.githubusercontent.com/hansalemaos/a_pandas_ex_plode_tool/main/recursion%20_hardcore_test.py
+
 ```python
 pip install a-pandas-ex-plode-tool
 ```
@@ -39,8 +45,6 @@ The code above will add some methods to **pd. / pd.DataFrame / pd.Series**, you
 - df.s_flatten_all_iters_in_cells()
 - df.s_as_flattened_list()
 - df.s_explode_lists_and_tuples()
-  
-  
 
 **All methods added to pandas have one of these prefixes:**
 
@@ -51,8 +55,6 @@ The code above will add some methods to **pd. / pd.DataFrame / pd.Series**, you
 - **d_** (only for DataFrames)
 
 - **Q_** (added to pd.)
-
-
 
 ### pd.Q_AnyNestedIterable_2df() / df.d_filter_dtypes() / df.d_update_original_iter()
 
@@ -159,7 +161,7 @@ df = pd.Q_AnyNestedIterable_2df(data,unstack=False)
                   Name  (2, cb, 1, Name)        A
                   num    (2, cb, 1, num)       67
   final_value NaN NaN   (2, final_value)      117
-df.d_filter_dtypes(allowed_dtypes=(int,float),fillvalue=pd.NA,column='aa_value') > 30, 'aa_value'] = 900000
+df.loc[df.d_filter_dtypes(allowed_dtypes=(int,float),fillvalue=pd.NA,column='aa_value') > 30, 'aa_value'] = 900000
                              aa_all_keys aa_value
 0 cb          0   ID      (0, cb, 0, ID)        1
                   Name  (0, cb, 0, Name)        A
@@ -2616,31 +2618,31 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         print(df2)
         df3=df.dicttest.s_explode_lists_and_tuples(column=None)
         print(df3)
-        
+
           lkey  value                  dicttest
         0  foo      1                  [(3, 3)]
         1  bar      2  [(2, 3), (2, 1), (2, 2)]
         2  baz      3          [(2, 3), (2, 3)]
         3  foo      5                  [(1, 2)]
-        
+
           lkey  value                  dicttest dicttest_0 dicttest_1 dicttest_2
         0  foo      1                  [(3, 3)]     (3, 3)       <NA>       <NA>
         1  bar      2  [(2, 3), (2, 1), (2, 2)]     (2, 3)     (2, 1)     (2, 2)
         2  baz      3          [(2, 3), (2, 3)]     (2, 3)     (2, 3)       <NA>
         3  foo      5                  [(1, 2)]     (1, 2)       <NA>       <NA>
-        
+
           dicttest_0 dicttest_1 dicttest_2
         0     (3, 3)       <NA>       <NA>
         1     (2, 3)     (2, 1)     (2, 2)
         2     (2, 3)     (2, 3)       <NA>
         3     (1, 2)       <NA>       <NA>
-        
+
           dicttest_0 dicttest_1 dicttest_2
         0     (3, 3)       <NA>       <NA>
         1     (2, 3)     (2, 1)     (2, 2)
         2     (2, 3)     (2, 3)       <NA>
         3     (1, 2)       <NA>       <NA>
-        
+
             Parameters:
                 df: Union[pd.Series, pd.DataFrame]
                     pd.Series, pd.DataFrame with lists/tuples in cells
@@ -2759,25 +2761,25 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         print(df1)
         df2=df.dicttest.ds_normalize_lists(column='dicttest')
         print(df2)
-        
+
           lkey  value          dicttest
         0  foo      1          [(3, 2)]
         1  bar      2          [(3, 1)]
         2  baz      3  [(3, 2), (3, 3)]
         3  foo      5  [(2, 3), (2, 1)]
-        
+
         0      [(3, 2), <NA>]
         1      [(3, 1), <NA>]
         2    [(3, 2), (3, 3)]
         3    [(2, 3), (2, 1)]
         Name: dicttest, dtype: object
-        
+
         0      [(3, 2), <NA>]
         1      [(3, 1), <NA>]
         2    [(3, 2), (3, 3)]
         3    [(2, 3), (2, 1)]
         Name: dicttest, dtype: object
-        
+
             Parameters:
                 df: Union[pd.Series, pd.DataFrame]
                     pd.Series, pd.DataFrame with lists/tuples in cells
@@ -2847,7 +2849,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
             suffixes=("_x", "_y"),
             indicator=False,
             validate=None,)
-        
+
            lkey  value_x_000  value_y_000  value_x_002  value_y_002  value
         0   foo            1            5           15          115   1115
         1   foo            1            5           15          115   1118
@@ -2913,13 +2915,13 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         getdi = lambda x: [    (randrange(1, 4), randrange(1, 4)) for v in range(20)]  #create some random tuples
         df["dicttest"] = df.lkey.apply(lambda x: getdi(x))
         print(df)
-        
+
         lkey  value                                           dicttest
         0  foo      1  [(3, 2), (3, 3), (3, 1), (1, 2), (2, 1), (3, 2...
         1  bar      2  [(1, 3), (3, 3), (1, 2), (3, 3), (2, 3), (1, 3...
         2  baz      3  [(1, 1), (1, 1), (3, 3), (1, 2), (1, 1), (2, 2...
         3  foo      5  [(2, 1), (2, 1), (1, 3), (1, 3), (3, 2), (2, 1...
-        
+
         list_=df.dicttest.s_as_flattened_list()
         print(list_[:20])
         [3, 2, 3, 3, 3, 1, 1, 2, 2, 1, 3, 2, 2, 1, 1, 2, 3, 3, 2, 2]
@@ -2935,7 +2937,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
     unstacked_df_back_to_multiindex(dataframe: pandas.core.frame.DataFrame) -> pandas.core.frame.DataFrame
             Don't use df.stack()!!!!
-        
+
         nested = {
         "Moli": {
             "Buy": 75,
@@ -2997,7 +2999,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                 Quantity   (Moli, Quantity)      300
                 Sell           (Moli, Sell)       53
                 TF               (Moli, TF)     True
-        
+
             Parameters:
                 dataframe:pd.DataFrame
                     pd.DataFrame
@@ -3028,9 +3030,9 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
              strict_bad                                     ignore_encoded  \
         0          True  [({\r\n"doc_id": "some_number",\r\n"url": "www...
         1          True                                                 []
-        
-        
-        
+
+
+
             Parameters:
                 filepath (str): file path
             Returns:
@@ -3042,14 +3044,14 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
     read_corrupt_json(filepath: str) -> dict
         Usage: pdQ_CorruptJsonFile_2dictf(r'C:\corruptjson1.json')
-        
+
         If you need to read a corrupted JSON file, you can try this method.
         It will first try to read the file using ujson.
         Second step: The file will be read using all encoders found in your env. Each result will be passed to ast.literal_eval, json.loads and ujson.loads
         Third step: Keys and values are extracted using regex
-        
+
         All positive results are returned as a dict, you have to check which one fits best to your needs
-        
+
             finaldict = {
                 "ujson_file_reading_result": ujson_file_reading_result,
                 "literal_eval_after_newline_removed": literal_eval_after_newline_removed,
@@ -3057,12 +3059,12 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                 "ujson_after_head_tail_removed": ujson_after_head_tail_removed,
                 "regex_get_single_item_keys": allgoodresultsdict,
             }
-        
+
         If the keys are not double-quoted, it won't work.
         It works well with spaces and not correctly escaped characters
-        
+
         Example from https://stackoverflow.com/questions/59927549/how-to-fix-a-possibly-corrupted-json-file-problems-with-a-curly-bracket-charact
-        
+
         {
         "doc_id": "some_number",
         "url": "www.seedurl1.com",
@@ -3087,7 +3089,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         ],
         "text": "lots more text over here."
         }
-        
+
         Result:
         {'ujson_file_reading_result': None,
          'literal_eval_after_newline_removed': Empty DataFrame
@@ -3096,12 +3098,12 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
          'json_after_head_tail_removed':       level_0  ...                                         json_loads
          862  punycode  ...  {'doc_id': 'some_number', 'url': 'www.seedurl1...
          865  punycode  ...  {'doc_id': 'some_number', 'url': 'www.seedurl1...
-        
+
          [2 rows x 8 columns],
          'ujson_after_head_tail_removed':       level_0  ...                                        ujson_loads
          862  punycode  ...  {'doc_id': 'some_number', 'url': 'www.seedurl1...
          865  punycode  ...  {'doc_id': 'some_number', 'url': 'www.seedurl1...
-        
+
          [2 rows x 9 columns],
          'regex_get_single_item_keys': [{'aa_value': {0: 'some_number',
             1: 'www.seedurl1.com',
@@ -3122,7 +3124,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
             9: '2019-10-22 17:44:40',
             10: 'unknown',
             ........
-        
+
             Parameters:
                 filepath (str): file path
             Returns:
@@ -3168,7 +3170,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                 df : pd.DataFrame
                 reverse: bool
                     Z-A instead of A-Z (default = False)
-        
+
             Returns:
                 pd.DataFrame
 ```
@@ -3212,7 +3214,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                     pd.Series, pd.DataFrame
                 include_na_strings: bool
                     When True -> treated as nan:
-        
+
                     [
                     "<NA>",
                     "<NAN>",
@@ -3237,11 +3239,11 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                     "nan",
                     "-nan",
                     ]
-        
+
                     (default =True)
                 include_empty_iters: bool
                     When True -> [], {} are treated as nan (default = False )
-        
+
                 include_0_len_string: bool
                     When True -> '' is treated as nan (default = False )
                     Returns:
@@ -3346,7 +3348,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
     df_loc_set(df: pandas.core.frame.DataFrame, condition: Union[pandas.core.series.Series, pandas.core.frame.DataFrame], new_data: Any, column: str) -> pandas.core.frame.DataFrame
         df = pd.read_csv("https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/data/titanic.csv")
-        
+
         df
         Out[51]:
              PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch            Ticket     Fare Cabin  Embarked
@@ -3377,8 +3379,8 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         889          890         1       1                              Behr, Mr. Karl Howell    male  ...      0            111369  100000.0000  C148         C
         890          891         0       3                                Dooley, Mr. Patrick    male  ...      0            370376  100000.0000   NaN         Q
         [891 rows x 12 columns]
-        
-        
+
+
             Parameters:
                 df: pd.Dataframe
                     DataFrame
@@ -3397,7 +3399,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
     df_loc(df: pandas.core.frame.DataFrame, condition: Union[pandas.core.series.Series, pandas.core.frame.DataFrame], column: Optional[str] = None) -> Union[pandas.core.series.Series, pandas.core.frame.DataFrame]
         df.d_dfloc(df.aa_value.str.contains("author")) is the same as df.loc[df.aa_value.str.contains('author')].copy()
-        
+
         df = pd.read_csv("https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/data/titanic.csv")
         print(df)
         print(df.d_dfloc(df.Sex.str.contains(r"mal$", regex=True, na=False)))
@@ -3458,7 +3460,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
     all_nans_in_df_to_pdNA(df: Union[pandas.core.series.Series, pandas.core.frame.DataFrame], include_na_strings: bool = True, include_empty_iters: bool = False, include_0_len_string: bool = False) -> Union[pandas.core.series.Series, pandas.core.frame.DataFrame]
         df = pd.read_csv("https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/data/titanic.csv")
-        
+
         df
         Out[86]:
              PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch            Ticket     Fare Cabin  Embarked
@@ -3503,13 +3505,13 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         889    C148
         890    <NA>
         Name: Cabin, Length: 891, dtype: object
-        
+
             Parameters:
                 df: Union[pd.Series, pd.DataFrame]
                     pd.Series, pd.DataFrame
                 include_na_strings: bool
                     When True -> treated as nan:
-        
+
                     [
                     "<NA>",
                     "<NAN>",
@@ -3534,11 +3536,11 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
                     "nan",
                     "-nan",
                     ]
-        
+
                     (default =True)
                 include_empty_iters: bool
                     When True -> [], {} are treated as nan (default = False )
-        
+
                 include_0_len_string: bool
                     When True -> '' is treated as nan (default = False )
                     Returns:

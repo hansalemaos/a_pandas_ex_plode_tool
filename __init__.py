@@ -12,13 +12,10 @@ import pandas as pd
 import regex
 import ujson
 from flatten_any_dict_iterable_or_whatsoever import ProtectedList, fla_tu
-
 from flatten_everything import flatten_everything
 from pandas.core.base import PandasObject
-
 from copy import deepcopy
 from a_pandas_ex_df_to_string import ds_to_string
-
 regexfornanstrings = regex.compile(
     r"^\s*\b(?:\\#N(?:/A(?:\\ N/A)?|A)|\\-(?:1\\.\\#(?:IND|QNAN)|NaN|nan)|1\\.\\#(?:IND|QNAN)|<(?:NA(?:N>|>)|nan>)|N(?:/A|ULL|aN|one(?:Type)?|A)|n(?:/a|an|p\\.nan|ull))\b\s*$"
 )
@@ -1728,13 +1725,15 @@ def nested_something_to_df(nested_whatever: Any, unstack: bool = True,) -> pd.Da
 
 
     """
-
-    flattenddict = list(fla_tu(nested_whatever))  # flatten every iterable
+    #no more warning when having dicts with 1486 subdicts : https://github.com/hansalemaos/a_pandas_ex_plode_tool/blob/main/recursion%20_hardcore_test.py
+    flattenddict =  fla_tu(nested_whatever)  # flatten every iterable
+    # from pprint import pprint as pp
+    # pp(flattenddict)
     # depending on the iterable, we have to convert it to a list and get the first (and only) tuple (which always has the same length -> 2 - value and keys[s])
 
-    flattenddict = [
-        list(x)[0] if "generator" in str(type(x)) else x for x in flattenddict
-    ]
+    # flattenddict = [
+    #     list(x)[0] if "generator" in str(type(x)) else x for x in flattenddict
+    # ]
     # now we have a dataframe, but all keys from our iterable are in one column
 
     df = pd.DataFrame(flattenddict)
