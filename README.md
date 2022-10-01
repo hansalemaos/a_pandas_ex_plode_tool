@@ -1,4 +1,4 @@
-## Library to handle any nested iterable (list, tuple, dict, json, etc.) in Pandas - no matter how deep it is nested!
+## Library to handle any nested iterable (list, tuple, dict, json, etc.) in Pandas - no matter how deeply it is nested!
 
 ## Update:
 
