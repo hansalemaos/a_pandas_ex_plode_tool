@@ -709,8 +709,9 @@ def _exs_normalize_lists_in_series(
 
     add_lists = (maxlen - len(list_)) * [pd.NA]
     if seriesback:
-        return pd.Series(list_ + add_lists)
+        return pd.Series(list_ + add_lists, dtype='object')
     return list_ + add_lists
+
 
 
 def normalize_lists_in_column_end_user(
