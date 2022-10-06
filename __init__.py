@@ -13,7 +13,8 @@ import regex
 import ujson
 from flatten_any_dict_iterable_or_whatsoever import ProtectedList, fla_tu
 from flatten_everything import flatten_everything
-from pandas.core.base import PandasObject
+#from pandas.core.base import PandasObject
+from pandas.core.frame import DataFrame, Series,Index
 from copy import deepcopy
 from a_pandas_ex_df_to_string import ds_to_string
 regexfornanstrings = regex.compile(
@@ -644,14 +645,14 @@ def qq_s_isnan(
     except Exception as Fehler:
         if debug is True:
             print(Fehler)
-    try:
-        if np.isnan(wert) is True:
-            if nan_back is True:
-                return pd.NA
-            return True
-    except Exception as Fehler:
-        if debug is True:
-            print(Fehler)
+    # try:
+    #     if np.isnan(wert) is True:
+    #         if nan_back is True:
+    #             return pd.NA
+    #         return True
+    # except Exception as Fehler:
+    #     if debug is True:
+    #         print(Fehler)
     try:
         if math.isnan(wert) is True:
             if nan_back is True:
@@ -711,7 +712,6 @@ def _exs_normalize_lists_in_series(
     if seriesback:
         return pd.Series(list_ + add_lists, dtype='object')
     return list_ + add_lists
-
 
 
 def normalize_lists_in_column_end_user(
@@ -930,6 +930,8 @@ def qq_ds_merge_multiple_dfs_and_series_on_index(
     """
     # pd.merge in a for-loop
     df2 = df.copy()
+    if not isinstance(list_with_ds, list):
+        list_with_ds=[list_with_ds]
     for ini, x in enumerate(list_with_ds):
         if isinstance(x, pd.Series):
             x = x.to_frame().copy()
@@ -1037,6 +1039,8 @@ def qq_ds_merge_multiple_dfs_and_series_on_column(
     """
     # pd.merge in a for-loop (is there a way to do this with pandas directly?)
     df2 = df.copy()
+    if not isinstance(list_with_ds, list):
+        list_with_ds=[list_with_ds]
     for ini, x in enumerate(list_with_ds):
         if isinstance(x, pd.Series):
             x = x.to_frame().copy()
@@ -2574,31 +2578,36 @@ def pd_add_explode_tools():
     pd.Q_CorruptJsonFile_2dict = read_corrupt_json
     pd.Q_ReadFileWithAllEncodings_2df = read_textfile_with_all_encoding_to_df
     pd.Q_AnyNestedIterable_2df = nested_something_to_df
-    PandasObject.d_filter_dtypes = df_loc_dtypes
-    PandasObject.d_multiple_columns_to_one = make_several_columns_fit_in_one
-    PandasObject.d_df_to_nested_dict = _to_nested_df
-    PandasObject.d_add_value_to_existing_columns_with_loc = df_loc_add
-    PandasObject.d_set_values_with_df_loc = df_loc_set
-    PandasObject.d_drop_rows_with_df_loc = df_loc_drop
-    PandasObject.d_dfloc = df_loc
-    PandasObject.d_stack = unstacked_df_back_to_multiindex
-    PandasObject.d_unstack = _unstack_df
-    PandasObject.d_sort_columns_with_sorted = qq_d_sort_columns_alphabetically
-    PandasObject.d_merge_multiple_dfs_and_series_on_one_column = (
+    DataFrame.d_filter_dtypes = df_loc_dtypes
+    DataFrame.d_multiple_columns_to_one = make_several_columns_fit_in_one
+    DataFrame.d_df_to_nested_dict = _to_nested_df
+    DataFrame.d_add_value_to_existing_columns_with_loc = df_loc_add
+    DataFrame.d_set_values_with_df_loc = df_loc_set
+    DataFrame.d_drop_rows_with_df_loc = df_loc_drop
+    DataFrame.d_dfloc = df_loc
+    DataFrame.d_stack = unstacked_df_back_to_multiindex
+    DataFrame.d_unstack = _unstack_df
+    DataFrame.d_sort_columns_with_sorted = qq_d_sort_columns_alphabetically
+    DataFrame.d_merge_multiple_dfs_and_series_on_one_column = (
         qq_ds_merge_multiple_dfs_and_series_on_column
     )
-    PandasObject.d_merge_multiple_dfs_and_series_on_index = (
+    DataFrame.d_merge_multiple_dfs_and_series_on_index = (
         qq_ds_merge_multiple_dfs_and_series_on_index
     )
-    PandasObject.ds_all_nans_to_pdNA = all_nans_in_df_to_pdNA
-    PandasObject.ds_explode_dicts_in_column = explode_dicts_in_column
-    PandasObject.ds_isna = is_nan_true_false_check
-    PandasObject.s_delete_duplicates_from_iters_in_cells = (
+    DataFrame.ds_all_nans_to_pdNA = all_nans_in_df_to_pdNA
+    DataFrame.ds_explode_dicts_in_column = explode_dicts_in_column
+    DataFrame.ds_isna = is_nan_true_false_check
+    Series.ds_all_nans_to_pdNA = all_nans_in_df_to_pdNA
+    Series.ds_explode_dicts_in_column = explode_dicts_in_column
+    Series.ds_isna = is_nan_true_false_check
+
+    Series.s_delete_duplicates_from_iters_in_cells = (
         delete_duplicates_in_column_full_of_iters
     )
-    PandasObject.s_flatten_all_iters_in_cells = flatten_all_iters_in_cells
-    PandasObject.s_as_flattened_list = series_as_flattened_list
-    PandasObject.s_explode_lists_and_tuples = explode_lists_and_tuples_in_column
-    PandasObject.ds_normalize_lists = normalize_lists_in_column_end_user
+    Series.s_flatten_all_iters_in_cells = flatten_all_iters_in_cells
+    Series.s_as_flattened_list = series_as_flattened_list
+    Series.s_explode_lists_and_tuples = explode_lists_and_tuples_in_column
+    DataFrame.ds_normalize_lists = normalize_lists_in_column_end_user
+    Series.ds_normalize_lists = normalize_lists_in_column_end_user
 
-    PandasObject.d_update_original_iter = d_update_original_iter
+    DataFrame.d_update_original_iter = d_update_original_iter

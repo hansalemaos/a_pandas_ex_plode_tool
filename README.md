@@ -132,6 +132,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)  #updating the nested i
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/73430585/how-to-convert-a-list-of-nested-dictionaries-includes-tuples-as-a-dataframe
+data=
 [{'cb': ({'ID': 1, 'Name': 'A', 'num': 50}, {'ID': 2, 'Name': 'A', 'num': 68}),
   'final_value': 118},
  {'cb': ({'ID': 1, 'Name': 'A', 'num': 50}, {'ID': 4, 'Name': 'A', 'num': 67}),
@@ -217,6 +218,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/69943509/problems-when-flatten-a-dict
+data=
 [{'application_contacts': [{'adress': 'X', 'email': 'test@test.com'}],
   'application_details': {'email': None, 'phone': None},
   'employer': {'Name': 'Nom', 'email': None},
@@ -297,6 +299,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/62765371/convert-nested-dataframe-to-a-simple-dataframeframe
+data=
 {'A': [1, 2, 3],
  'B': [4, 5, 6],
  'departure': [{'actual': None,
@@ -473,6 +476,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/64359762/constructing-a-pandas-dataframe-with-columns-and-sub-columns-from-nested-diction
+data=
 {'level1': {'t1': {'s1': {'col1': 5, 'col2': 4, 'col3': 4, 'col4': 9},
                    's2': {'col1': 1, 'col2': 5, 'col3': 4, 'col4': 8},
                    's3': {'col1': 11, 'col2': 8, 'col3': 2, 'col4': 9},
@@ -625,6 +629,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/72146094/problems-matching-values-from-nested-dictionary
+data=
 {'_links': {'next': None, 'prev': None},
  'limit': 250,
  'offset': 0,
@@ -798,6 +803,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/73708706/how-to-get-values-from-list-of-nested-dictionaries/73839430#73839430
+data=
 {'results': [{'end_time': '2021-01-21',
               'key': 'q1',
               'result_type': 'multipleChoice',
@@ -904,6 +910,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/66461902/flattening-nested-dictionary-into-dataframe-python
+data=
 {1: {2: {'IDs': {'BookID': ['543533254353', '4324232342'],
                  'SalesID': ['543267765345', '4353543'],
                  'StoreID': ['111111', '1121111']},
@@ -1018,6 +1025,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)  #updating the nested i
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/72990265/convert-nested-list-in-dictionary-to-dataframe/72990346
+data=
 {'a': 'test',
  'b': 1657,
  'c': 'asset',
@@ -1102,6 +1110,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/73430585/how-to-convert-a-list-of-nested-dictionaries-includes-tuples-as-a-dataframe
+data=
 [{'cb': ({'ID': 1, 'Name': 'A', 'num': 50}, {'ID': 2, 'Name': 'A', 'num': 68}),
   'final_value': 118},
  {'cb': ({'ID': 1, 'Name': 'A', 'num': 50}, {'ID': 4, 'Name': 'A', 'num': 67}),
@@ -1187,6 +1196,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/69943509/problems-when-flatten-a-dict
+data=
 [{'application_contacts': [{'adress': 'X', 'email': 'test@test.com'}],
   'application_details': {'email': None, 'phone': None},
   'employer': {'Name': 'Nom', 'email': None},
@@ -1267,6 +1277,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/62765371/convert-nested-dataframe-to-a-simple-dataframeframe
+data=
 {'A': [1, 2, 3],
  'B': [4, 5, 6],
  'departure': [{'actual': None,
@@ -1443,6 +1454,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/64359762/constructing-a-pandas-dataframe-with-columns-and-sub-columns-from-nested-diction
+data=
 {'level1': {'t1': {'s1': {'col1': 5, 'col2': 4, 'col3': 4, 'col4': 9},
                    's2': {'col1': 1, 'col2': 5, 'col3': 4, 'col4': 8},
                    's3': {'col1': 11, 'col2': 8, 'col3': 2, 'col4': 9},
@@ -1595,6 +1607,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/72146094/problems-matching-values-from-nested-dictionary
+data=
 {'_links': {'next': None, 'prev': None},
  'limit': 250,
  'offset': 0,
@@ -1768,6 +1781,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/73708706/how-to-get-values-from-list-of-nested-dictionaries/73839430#73839430
+data=
 {'results': [{'end_time': '2021-01-21',
               'key': 'q1',
               'result_type': 'multipleChoice',
@@ -1874,6 +1888,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/66461902/flattening-nested-dictionary-into-dataframe-python
+data=
 {1: {2: {'IDs': {'BookID': ['543533254353', '4324232342'],
                  'SalesID': ['543267765345', '4353543'],
                  'StoreID': ['111111', '1121111']},
@@ -1940,6 +1955,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/72017771/key-error-when-accessing-a-nested-dictionary
+data=
 [{'blocks': [{'block_id': 'BJNTn',
               'text': {'text': 'You have a new message.',
                        'type': 'mrkdwn',
@@ -2182,6 +2198,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/73643077/how-to-transform-a-list-of-nested-dictionaries-into-a-data-frame-pd-json-normal
+data=
 [{'apple': {'price': 4, 'units': 3}},
  {'banana': {'price': 2, 'units': 20}},
  {'orange': {'price': 5, 'units': 15}}]
@@ -2212,6 +2229,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/58110440/opening-nested-dict-in-a-single-column-to-multiple-columns-in-pandas
+data=
 {'simple25b': {'hands': {'0': {'currency': 'rm',
                                'handId': 'xyz',
                                'time': '2019-09-23 11:00:01'},
@@ -2307,6 +2325,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/62059970/how-can-i-convert-nested-dictionary-to-pd-dataframe-faster
+data=
 {'file': 'name',
  'main': [{'answer': [{'comment': 'It is defined as',
                        'user': 'John',
@@ -2382,6 +2401,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 ```python
 #Nested iterable from: 
 https://stackoverflow.com/questions/39634369/4-dimensional-nested-dictionary-to-pandas-data-frame
+data=
 {'orders': [{'created_at': '2016-09-20T22:04:49+02:00',
              'email': 'test@aol.com',
              'id': 4314127108,
@@ -3319,7 +3339,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         889          890         1       1                              Behr, Mr. Karl Howell    male  ...      0            111369  30.0000  C148         C
         890          891         0       3                                Dooley, Mr. Patrick    male  ...      0            370376   7.7500   NaN         Q
         [891 rows x 12 columns]
-        df.d_drop_rows_with_df_loc(df.Sex.str.contains(r"mal$", regex=True, na=False))
+        df.d_drop_rows_with_df_loc(df.Sex.str.contains(r"male$", regex=True, na=False))
         Out[55]:
              PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch            Ticket     Fare Cabin  Embarked
         1              2         1       1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  ...      0          PC 17599  71.2833   C85         C
@@ -3364,7 +3384,7 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
         889          890         1       1                              Behr, Mr. Karl Howell    male  ...      0            111369  30.0000  C148         C
         890          891         0       3                                Dooley, Mr. Patrick    male  ...      0            370376   7.7500   NaN         Q
         [891 rows x 12 columns]
-        df.d_set_values_with_df_loc(condition = df.Sex.str.contains(r"mal$", regex=True, na=False),column = 'Fare',new_data = 100000)
+        df.d_set_values_with_df_loc(condition = df.Sex.str.contains(r"male$", regex=True, na=False),column = 'Fare',new_data = 100000)
         Out[52]:
              PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch            Ticket         Fare Cabin  Embarked
         0              1         0       3                            Braund, Mr. Owen Harris    male  ...      0         A/5 21171  100000.0000   NaN         S
@@ -3402,8 +3422,8 @@ mod_iter = df.d_update_original_iter(data, verbose=True)
 
         df = pd.read_csv("https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/data/titanic.csv")
         print(df)
-        print(df.d_dfloc(df.Sex.str.contains(r"mal$", regex=True, na=False)))
-        df.d_dfloc(df.Sex.str.contains(r"mal$", regex=True, na=False),column='Name')
+        print(df.d_dfloc(df.Sex.str.contains(r"male$", regex=True, na=False)))
+        df.d_dfloc(df.Sex.str.contains(r"male$", regex=True, na=False),column='Name')
              PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch            Ticket     Fare Cabin  Embarked
         0              1         0       3                            Braund, Mr. Owen Harris    male  ...      0         A/5 21171   7.2500   NaN         S
         1              2         1       1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  ...      0          PC 17599  71.2833   C85         C
