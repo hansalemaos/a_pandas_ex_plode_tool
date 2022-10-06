@@ -1,6 +1,6 @@
 #sys.getrecursionlimit()
 #Out[7]: 3000
-#Passed,but with PerformanceWarning: DataFrame is highly fragmented
+#Passed without problems
 from flatten_any_dict_iterable_or_whatsoever import flatten_nested_something_to_list_of_tuples
 from collections import defaultdict
 nested_dict = lambda: defaultdict(nested_dict)
