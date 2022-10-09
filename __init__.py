@@ -17,9 +17,8 @@ from flatten_everything import flatten_everything
 from pandas.core.frame import DataFrame, Series,Index
 from copy import deepcopy
 from a_pandas_ex_df_to_string import ds_to_string
-regexfornanstrings = regex.compile(
-    r"^\s*\b(?:\\#N(?:/A(?:\\ N/A)?|A)|\\-(?:1\\.\\#(?:IND|QNAN)|NaN|nan)|1\\.\\#(?:IND|QNAN)|<(?:NA(?:N>|>)|nan>)|N(?:/A|ULL|aN|one(?:Type)?|A)|n(?:/a|an|p\\.nan|ull))\b\s*$"
-)
+regexfornanstrings=regex.compile(r'''^(?:\#N(?:/A(?:\ N/A)?|A)|\-(?:1\.\#(?:IND|QNAN)|NaN|nan)|1\.\#(?:IND|QNAN)|<(?:NA(?:N>|>)|nan>)|N(?:/A|ULL|aN|one(?:Type)?|A)|n(?:/a|an|p\.nan|ull)|pd\.NA)$''')
+
 
 
 def _to_nested_df(df: pd.DataFrame, groupby: str, subkeys: list) -> dict:
